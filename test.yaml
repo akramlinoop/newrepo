@@ -1,0 +1,16 @@
+---
+- name: Update system and reboot if required
+  hosts: all
+  become: yes
+  tasks:
+    - name: Update all packages
+      yum:
+        name: "*"
+        state: latest
+      register: yum_update
+
+    - name: Reboot if packages were updated
+      reboot:
+        reboot_timeout: 600
+      when: yum_update.changed
+
