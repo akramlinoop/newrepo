@@ -1,17 +1,18 @@
 ---
-- name: Install and start httpd
+- name: Update httpd and restart if needed
   hosts: all
   become: yes
 
   tasks:
-    - name: Install httpd
+    - name: Update httpd package
       yum:
         name: httpd
-        state: present
+        state: latest
+      notify: Restart httpd
 
-    - name: Start and enable httpd
+  handlers:
+    - name: Restart httpd
       service:
         name: httpd
-        state: started
-        enabled: yes
+        state: restarted
 
