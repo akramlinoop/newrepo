@@ -1,0 +1,18 @@
+---
+- name: Create users on all hosts
+  hosts: all
+  become: yes
+
+  vars_files:
+    - user_information.yml
+
+  tasks:
+    - name: Add users
+      user:
+        name: "{{ item.name }}"
+        uid: "{{ item.uid }}"
+        comment: "{{ item.first | capitalize }} {{ item.middle | capitalize }} {{ item.last | capitalize }}"
+        password: "{{ lookup('password', './password-{{ item.name }} length=6') | password_hash('sha512') }}"
+        update_password: on_create
+        state: present
+      loop: "{{ myusers }}"
