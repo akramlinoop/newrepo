@@ -1,0 +1,10 @@
+---
+- name: Update httpd and restart if needed
+  hosts: all
+  become: yes
+
+  tasks:
+    - name: Update httpd package
+      yum:
+        name: httpd
+        state: latest
