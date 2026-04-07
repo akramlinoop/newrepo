@@ -1,0 +1,16 @@
+---
+- name: create a file on remote host
+  hosts: all
+  vars:
+          - file: akram.txt
+          - directory: /tmp
+          - content: hello
+
+
+
+  tasks:
+          - name: Copy using inline content
+            ansible.builtin.copy:
+                  content: "{{ content }}"
+                  dest: "{{ directory }}/{{ file }}"
+

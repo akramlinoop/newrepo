@@ -1,0 +1,8 @@
+---
+- name: create users using newuser roles
+  hosts: all
+  become: true
+  collections:
+          - rhel.user
+  roles:
+          - newuser

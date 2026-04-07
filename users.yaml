@@ -11,6 +11,8 @@
         group: manager
       - name: bob
         group: developer
+      - name: imran
+        group: manager
 
   tasks:
     - name: Ensure groups exist

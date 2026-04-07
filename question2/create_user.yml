@@ -1,0 +1,22 @@
+---
+- name: Create users and assign groups
+  hosts: all
+  become: yes
+  vars_files: user_git.yml
+  tasks:
+    - name: Ensure groups exist
+      group:
+        name: "{{ item.group }}"
+        state: present
+      loop: "{{ users }}"
+      loop_control:
+        label: "{{ item.group }}"
+
+    - name: Create users and assign to groups
+      user:
+        name: "{{ item.name }}"
+        group: "{{ item.group }}"
+        state: present
+        create_home: yes
+      loop: "{{ users }}"
+

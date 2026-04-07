@@ -1,0 +1,15 @@
+---
+- hosts: ansibleclient.example.com
+  gather_facts: False
+  tasks:
+     - name: Copy using inline content
+       ansible.builtin.copy:
+            content: 'This file was moved to new server'
+            dest: /tmp/copy1.txt
+       tags: ['never','imran']
+
+     - name: Copy using inline content
+       ansible.builtin.copy:
+            content: '# This file was moved to /etc/other.conf'
+            dest: /tmp/copy2.txt
+       tags: ['never','akram']

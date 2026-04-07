@@ -1,0 +1,6 @@
+---
+# tasks file for newuser 
+  - name: creae a user
+    user:
+            - name: akram
+              state: present

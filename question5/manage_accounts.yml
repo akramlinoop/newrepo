@@ -1,0 +1,18 @@
+---
+- name: create user
+  hosts: all
+  become: yes  
+  vars_files:
+    - user_information.yml
+
+  tasks:
+          - name: Add the user 'johnd' with a specific uid and a primary group of 'admin'
+            ansible.builtin.user:
+                  name: "{{ item.name }}"
+                  comment: "{{ item.first| capitalize }} {{ item.middle | default ('') }} {{ item.last| capitalize }}"
+                  uid: "{{ item.uid }}"
+                  password: "{{ lookup('ansible.builtin.password', './password-{{ item.name }} length=6')| password_hash('sha512') }}"
+                  update_password: on_create
+                  state: present
+            loop: "{{ myusers }}"
+

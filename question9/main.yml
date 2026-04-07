@@ -1,0 +1,10 @@
+---
+- name: banner
+  hosts: all
+  become: true
+  tasks:
+           - name: Copy using inline content
+             ansible.builtin.copy:
+                content: 'The comes up and then it goes down'
+                dest: /etc/motd.d/banner
+
