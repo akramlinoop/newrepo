@@ -1,6 +1,6 @@
 ---
 users:
-                     - name: frank
+                     - name: abc
                        group: developer
                      - name: harry
                        group: manager
